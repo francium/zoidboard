@@ -7,9 +7,13 @@ name = "pypi"
 flask = "*"
 gunicorn = "*"
 pyyaml = "*"
+pytest = "*"
 
 [dev-packages]
 pylint = "*"
+"autopep8" = "*"
+dsb = {editable = true, path = "."}
+rope = "*"
 
 [requires]
 python_version = "3"
