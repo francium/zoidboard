@@ -42,7 +42,7 @@ class Store:
             raise TypeError(f'typeof <{typeof}> is invalid')
 
         self._map[label] = value
-        
+
     def update(self, label, value):
         entry = self._map.get(label)
         if not entry:

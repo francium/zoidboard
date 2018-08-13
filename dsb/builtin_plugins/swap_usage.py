@@ -6,7 +6,7 @@ label = 'Swap Usage'
 update_period = 10
 data_points = int(24 * 3600 / update_period)
 units = None
-typeof = 'vector', float
+typeof = 'vector', 'float'
 cmd = 'cat', '/proc/meminfo'
 def callback(result: str) -> Dict[str, int]:
     raw_lines = result.split('\n')[:-1]

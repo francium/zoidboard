@@ -3,7 +3,7 @@
 
 from multiprocessing.dummy import Pool
 import time
-from typing import Any, Callable, List, Tuple, Union
+from typing import Any, Callable, Dict, Tuple, Union
 import logging
 
 from .scheduler import ScheduleItem, Scheduler
@@ -56,16 +56,17 @@ class Plugin:
 class PluginRunner:
     TIMEOUT_DELTA = 0.05
 
-    def __init__(self, plugins: List[Plugin]):
+    def __init__(self, plugins: Dict[str, Plugin]):
         self._plugins = plugins
+        self._plugin_lookup = {plugin: name for name, plugin in plugins.items()}
         self._scheduler = Scheduler()
         self._exec_pool = Pool()
         self._t0 = 0
 
     def start(self):
-        for plugin in self._plugins:
+        for name, plugin in self._plugins.items():
             data_points = getattr(plugin, 'data_points', None)
-            store.register(plugin.label, plugin.typeof[0], data_points)
+            store.register(name, plugin.typeof[0], data_points)
             self._scheduler.push((plugin.next_run, plugin))
         self.loop()
 
@@ -84,7 +85,10 @@ class PluginRunner:
             self._submit_plugin(plugin)
 
     def _on_plugin_result(self, result: Any, plugin: Plugin):
-        store.update(plugin.label, result)
+        name = self._plugin_lookup[plugin]
+        data = (round(time.time()), result) if plugin.typeof[0] == 'vector' else result
+        logger.debug(f'Storing data for {plugin.label}: {data}')
+        store.update(name, data)
 
     def _on_plugin_err(self, exc: Exception, plugin: Plugin):
         logger.warn(f'Plugin "{plugin.label}" failed with: {exc}')

@@ -8,6 +8,7 @@ flask = "*"
 gunicorn = "*"
 pyyaml = "*"
 pytest = "*"
+flask-cors = "*"
 
 [dev-packages]
 pylint = "*"

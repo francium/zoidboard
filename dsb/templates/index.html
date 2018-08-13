@@ -1,6 +1,13 @@
-<dl>
-    {% for stat in stats %}
-        <dt>{{ stat[0] }}</dt>
-        <dd>{{ stat[1] }}</dd>
-    {% endfor %}
-</dl>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/main.css') }}">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="{{ url_for('static', filename='./js/main.js') }}"></script>
+</body>
+</html>

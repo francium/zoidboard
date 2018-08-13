@@ -3,10 +3,10 @@ from typing import Dict
 
 
 label = 'Memory Usage'
-update_period = 1
+update_period = 5
 data_points = int(24 * 3600 / update_period)
 units = None
-typeof = 'vector', float
+typeof = 'vector', 'float'
 cmd = 'cat', '/proc/meminfo'
 def callback(result: str) -> Dict[str, int]:
     raw_lines = result.split('\n')[:-1]

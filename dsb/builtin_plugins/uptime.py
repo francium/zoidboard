@@ -2,9 +2,9 @@ from datetime import datetime
 
 
 label = 'Uptime'
-update_period = 5
+update_period = 60
 units = None
-typeof = 'scalar', str
+typeof = 'scalar', 'float'
 cmd = 'cat', '/proc/uptime'
 def callback(result: str) -> str:
     uptime = result.split(' ')[0]

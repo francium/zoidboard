@@ -7,13 +7,15 @@ import re
 import sys
 from typing import Dict, Callable, Union
 
-from .utils import run_cmd    
+from .utils import run_cmd
 
 
 CUSTOM_PLUGIN_LOCATION = os.path.expanduser('~/.config/dsb/plugins/')
 
 
 logger = logging.getLogger()
+
+cache = {}
 
 
 @contextmanager
@@ -51,4 +53,17 @@ def _load_custom_plugin(plugin_name: str):
 
 
 def get(plugin_name: str) -> Union[Callable]:
-    return _load_builtin_plugin(plugin_name) or _load_custom_plugin(plugin_name)
+    cached = cache.get(plugin_name)
+    found = _load_builtin_plugin(plugin_name) or _load_custom_plugin(plugin_name)
+    if not cached and found:
+        cache[plugin_name] = found
+
+    return cached or found
+
+
+def serialize_plugin(name, plugin):
+    return {'name': name,
+            'plugin': {'label': plugin.label,
+                       'update_period': plugin.update_period,
+                       'typeof': (plugin.typeof[0], str(plugin.typeof[1])),
+                       'units': plugin.units}}

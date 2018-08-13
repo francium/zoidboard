@@ -14,12 +14,12 @@ from dsb.plugins import get as get_plugin
 
 logger = logging.getLogger(__name__)
 
-plugins = []
+plugins = {}
 for plugin_name in config['plugins']:
     plugin = get_plugin(plugin_name)
     if not plugin: continue
 
-    plugins.append(Plugin.from_module(plugin))
+    plugins[plugin_name] = Plugin.from_module(plugin)
 
 runner = PluginRunner(plugins)
 thread = threading.Thread(target=runner.start)
