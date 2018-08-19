@@ -35,6 +35,7 @@ def create_app(plugins):
         plugins: str = config['plugins']
         return _get_stats(plugins)
 
+    app.logger.setLevel(logging.ERROR)
     return app
 
 

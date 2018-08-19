@@ -64,7 +64,10 @@ class PluginRunner:
         self._t0 = 0
 
     def start(self):
+        logger.info('Starting pluigin runner')
+
         for name, plugin in self._plugins.items():
+            logger.info(f'Registering {name} in store')
             data_points = getattr(plugin, 'data_points', None)
             store.register(name, plugin.typeof[0], data_points)
             self._scheduler.push((plugin.next_run, plugin))

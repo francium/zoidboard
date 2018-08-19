@@ -35,7 +35,7 @@ def _try_import(name: str, custom_location: Union[str] = None):
 def _load_builtin_plugin(plugin_name: str):
     with _try_import('dsb.builtin_plugins.' + plugin_name) as plugin:
         if plugin:
-            logger.info(f'Loaded builtin plugin "{ plugin_name }"')
+            logger.debug(f'Loaded builtin plugin "{ plugin_name }"')
         else:
             logger.warn(f'Could not find buitlin plugin "{ plugin_name }"')
 
@@ -45,7 +45,7 @@ def _load_builtin_plugin(plugin_name: str):
 def _load_custom_plugin(plugin_name: str):
     with _try_import(plugin_name, CUSTOM_PLUGIN_LOCATION) as plugin:
         if plugin:
-            logger.info(f'Loaded custom plugin "{plugin_name }"')
+            logger.debug(f'Loaded custom plugin "{plugin_name }"')
         else:
             logger.warn(f'Could not find plugin "{ plugin_name }" in plugin'
                         f' directory "{ CUSTOM_PLUGIN_LOCATION }"')
