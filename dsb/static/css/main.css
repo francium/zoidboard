@@ -1,3 +1,7 @@
+html {
+  font-family: sans
+}
+
 #root {
   display: flex;
   flex-direction: row;
@@ -5,16 +9,20 @@
 }
 
 .chart-container {
+  position: relative;
   width: 500px !important;
   border: 1px solid gray;
-  padding: 1em;
+  padding: 0.5em;
   margin: 1em;
-  position: relative;
 }
 
 .scalar-container {
   width: 500px;
   border: 1px solid gray;
-  padding: 1em;
+  padding: 0.5em;
   margin: 1em;
+}
+
+.scalar-value {
+  font-family: monospace;
 }

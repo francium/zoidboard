@@ -6,8 +6,8 @@ export function ScalarComponent({label, data})
   return html.div(
     {className: 'scalar-container'},
     [
-      html.div([label]),
-      html.div([data])
+      html.div({ class: 'scalar-label' }, [label]),
+      html.div({ class: 'scalar-value' }, [data])
     ]
   )
 }

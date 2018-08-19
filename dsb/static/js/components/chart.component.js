@@ -51,13 +51,20 @@ function create_chart(host, label, labels, data, min = undefined, max = undefine
         animation: { duration: 0 },
         scales: {
           yAxes: [{
+            gridLines: {
+              drawBorder: false
+            },
             ticks: {
               fontSize: 9,
               min,
-              max
+              max,
+              padding: 10
             }
           }],
           xAxes: [{
+            gridLines: {
+              display: false
+            },
             ticks: {
               fontSize: 9,
               minRotation: 0,

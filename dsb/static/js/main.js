@@ -54,9 +54,35 @@ function create_scalar_element(plugin)
 function create_chart_element(plugin)
 {
   const MILLI_IN_SEC = 1000
-  const labels = plugin.data.map(data =>
-    new Date(data[0] * MILLI_IN_SEC).toLocaleTimeString())
-  const data = plugin.data.map(dataum => dataum[1])
+
+  const labels = []
+  const data = []
+
+  for (let i = 0; i < plugin.data.length; i++)
+  {
+    const timestamp = plugin.data[i][0]
+    const datum = plugin.data[i][1]
+
+    labels.push(new Date(timestamp * MILLI_IN_SEC).toLocaleTimeString())
+    data.push(datum)
+
+    // If gap in data
+    if (i + 1 >= plugin.data.length) { continue }
+
+    // Fill in missing data if any interval data is missing
+    const next_timestamp = plugin.data[i + 1][0]
+    if (next_timestamp > (timestamp + plugin.schema.update_period))
+    {
+      const [missing_labels, missing_data] =
+        generate_missing_labels_and_data(
+          timestamp, next_timestamp, plugin.update_interval)
+      labels.push(
+        ...missing_labels.map(missing_label =>
+          new Date(missing_label * MILLI_IN_SEC).toLocaleTimeString()))
+      data.push(...missing_data)
+    }
+  }
+
   return ChartComponent({
     id: `chart-{plugin.label.toLowerCase().replace(' ', '-')}`,
     label: plugin.schema.label,
@@ -110,4 +136,13 @@ async function getPlugins()
 	})
 
   return plugins
+}
+
+
+function generate_missing_labels_and_data(start, end, interval)
+{
+  const labels = []
+  for (let i = start; i < end; i++)
+    labels.push(i)
+  return [labels, labels.map(_ => null)]
 }
