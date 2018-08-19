@@ -6,7 +6,6 @@
 
 .chart-container {
   width: 500px !important;
-  height: 400px !important;
   border: 1px solid gray;
   padding: 1em;
   margin: 1em;
@@ -15,7 +14,6 @@
 
 .scalar-container {
   width: 500px;
-  height: 100px;
   border: 1px solid gray;
   padding: 1em;
   margin: 1em;
