@@ -5,13 +5,9 @@
   <title></title>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='./css/main.css') }}">
-
-	<script src="https://unpkg.com/hyperapp"></script>
-	<script src="https://unpkg.com/@hyperapp/html"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="module" src="{{ url_for('static', filename='./js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='./bundle.js') }}"></script>
 </body>
 </html>

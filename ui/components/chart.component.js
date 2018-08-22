@@ -1,9 +1,11 @@
-const html = window.hyperappHtml
+import * as html from '@hyperapp/html'
+import { Chart } from 'chart.js'
+import * as chartjs from 'chart.js'
 
 
-Chart.defaults.global.elements.point.radius = 0
-Chart.defaults.global.elements.line.tension = 0.4
-Chart.defaults.global.elements.line.tension = 0.4
+chartjs.defaults.global.elements.point.radius = 0
+chartjs.defaults.global.elements.line.tension = 0.4
+chartjs.defaults.global.elements.line.tension = 0.4
 
 
 export function ChartComponent({id, label, labels, data, min, max})

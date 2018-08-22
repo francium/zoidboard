@@ -1,0 +1,27 @@
+{
+  "name": "dsb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ui/main.js",
+  "directories": {},
+  "dependencies": {
+    "@hyperapp/html": "^1.1.1",
+    "chart.js": "^2.7.2",
+    "hyperapp": "^1.2.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "watch": "parcel watch -d dsb/static/ -o bundle.js --public-url '/static' ui/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gojira.local/francium/dsb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "firefox >= 58",
+    "chrome >= 67"
+  ]
+}

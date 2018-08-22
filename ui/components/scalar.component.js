@@ -1,4 +1,4 @@
-const html = window.hyperappHtml
+import * as html from '@hyperapp/html'
 
 
 export function ScalarComponent({label, data})
