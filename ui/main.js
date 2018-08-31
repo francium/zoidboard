@@ -1,10 +1,9 @@
+import { app } from 'hyperapp'
+import * as html from '@hyperapp/html'
+
 import * as models from './models.js';
 import { ChartComponent } from './components/chart.component.js'
 import { ScalarComponent } from './components/scalar.component.js'
-
-const h = window.hyperapp.h
-const app = window.hyperapp.app
-const html = window.hyperappHtml
 
 
 main()
@@ -34,20 +33,20 @@ async function main()
 
 function create_plugin_element(plugin)
 {
-	if (plugin.schema.typeof[0] === 'vector')
-	{
-		return create_chart_element(plugin)
-	}
-	else if (plugin.schema.typeof[0] === 'scalar')
-	{
-		return create_scalar_element(plugin)
-	}
+  if (plugin.schema.typeof[0] === 'vector')
+  {
+    return create_chart_element(plugin)
+  }
+  else if (plugin.schema.typeof[0] === 'scalar')
+  {
+    return create_scalar_element(plugin)
+  }
 }
 
 
 function create_scalar_element(plugin)
 {
-	return ScalarComponent({label: plugin.schema.label, data: plugin.data})
+  return ScalarComponent({label: plugin.schema.label, data: plugin.data})
 }
 
 
@@ -96,44 +95,44 @@ function create_chart_element(plugin)
 
 async function get_schemas()
 {
-	const schemas = await (await fetch('/api/plugin/schemas')).json()
-	return schemas.reduce((acc, schema) =>
-	{
-		acc[schema.name] = schema.plugin
-		return acc
-	}, {})
+  const schemas = await (await fetch('/api/plugin/schemas')).json()
+  return schemas.reduce((acc, schema) =>
+  {
+    acc[schema.name] = schema.plugin
+    return acc
+  }, {})
 }
 
 
 async function get_stats()
 {
-	const stats = await (await fetch('/api/plugin/stats')).json()
-	return stats.reduce((acc, stat) =>
-	{
-		acc[stat.name] = stat.data
-		return acc
-	}, {})
+  const stats = await (await fetch('/api/plugin/stats')).json()
+  return stats.reduce((acc, stat) =>
+  {
+    acc[stat.name] = stat.data
+    return acc
+  }, {})
 }
 
 
 async function getPlugins()
 {
-	let stats
-	let schemas
+  let stats
+  let schemas
 
-	await Promise.all(
-	[
-		get_schemas().then(data => schemas = data),
-		get_stats().then(data => stats = data)
-	])
+  await Promise.all(
+  [
+    get_schemas().then(data => schemas = data),
+    get_stats().then(data => stats = data)
+  ])
 
-	const plugins = {}
-	Object.keys(stats).forEach(key =>
-	{
-		const data = stats[key]
-		const schema = schemas[key]
-		plugins[key] = new models.Plugin(data, schema)
-	})
+  const plugins = {}
+  Object.keys(stats).forEach(key =>
+  {
+    const data = stats[key]
+    const schema = schemas[key]
+    plugins[key] = new models.Plugin(data, schema)
+  })
 
   return plugins
 }
