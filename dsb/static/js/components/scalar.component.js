@@ -7,7 +7,7 @@ export function ScalarComponent({label, data})
     {className: 'scalar-container'},
     [
       html.div({ class: 'scalar-label' }, [label]),
-      html.div({ class: 'scalar-value' }, [data])
+      html.pre({ class: 'scalar-value' }, [data])
     ]
   )
 }

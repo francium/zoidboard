@@ -26,3 +26,7 @@ html {
 .scalar-value {
   font-family: monospace;
 }
+
+pre {
+  margin: 0;
+}

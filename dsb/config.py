@@ -12,7 +12,8 @@ _DEFAULT_CONFIG = {
     'plugins': [
         'ip',
         'uptime',
-        'memory',
+        'mem_usage',
+        'swap_usage',
     ]
 }
 

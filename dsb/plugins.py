@@ -7,8 +7,6 @@ import re
 import sys
 from typing import Dict, Callable, Union
 
-from .utils import run_cmd
-
 
 CUSTOM_PLUGIN_LOCATION = os.path.expanduser('~/.config/dsb/plugins/')
 
