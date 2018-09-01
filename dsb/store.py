@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 import time
 from threading import Thread
 from typing import Any, List, Union
@@ -103,9 +104,20 @@ class Store:
 
 
 class StorePersistance:
-    def get(self, label):
+    STORE_LOCATION = os.path.expanduser('~/.local/share/dsb/')
+
+    def __init__(self):
+        # Init store location
         try:
-            with open(label + '.dat') as f:
+            os.makedirs(self.STORE_LOCATION)
+        except FileExistsError:
+            pass
+
+    def get(self, label):
+        filename = label + '.dat'
+        file_path = os.path.join(self.STORE_LOCATION, filename)
+        try:
+            with open(file_path) as f:
                 data = json.loads(f.read())
         except FileNotFoundError:
             logger.info(f'No existing data for {label + ".dat"}')
@@ -121,7 +133,8 @@ class StorePersistance:
         thread.start()
 
     def _write(self, filename, data):
-        with open(filename, 'w') as f:
+        file_path = os.path.join(self.STORE_LOCATION, filename)
+        with open(file_path, 'w') as f:
             f.write(json.dumps(data))
 
 
