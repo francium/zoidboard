@@ -1,0 +1,5 @@
+recursive-include dsb/builtin_plugins *
+recursive-include dsb/templates *
+recursive-include dsb/static *
+include Pipfile
+include Pipfile.lock

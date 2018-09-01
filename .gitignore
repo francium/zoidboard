@@ -1,7 +1,10 @@
-/.vscode
+/dist/
+/.vscode/
 /.pytest_cache/
 .cache/
 __pycache__
 *.dat
 *.egg-info
 node_modules/
+/dsb/static/bundle.js
+/dsb/static/bundle.map
