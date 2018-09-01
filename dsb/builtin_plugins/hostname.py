@@ -1,5 +1,5 @@
 label = 'Hostname'
-update_period = 2
+update_period = 99999
 units = None
 typeof = 'scalar', 'string'
 cmd = 'cat', '/etc/hostname'

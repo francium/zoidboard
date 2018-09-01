@@ -1,25 +1,28 @@
-html {
-  font-family: sans
-}
+@import url('https://unpkg.com/picnic');
 
 #root {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 67%;
 }
 
 .chart-container {
   position: relative;
-  width: 500px !important;
+  /* width: 500px !important; */
   height: 250px;
-  border: 1px solid gray;
   padding: 0.5em;
   margin: 1em;
 }
 
 .scalar-container {
-  width: 500px;
-  border: 1px solid gray;
+  /* width: 500px; */
   padding: 0.5em;
   margin: 1em;
 }
@@ -30,4 +33,12 @@ html {
 
 pre {
   margin: 0;
+  padding: 0.5em;
 }
+
+@media (max-width: 1024px) {
+  .app-container {
+    max-width: 786px;
+  }
+}
+

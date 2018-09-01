@@ -20,6 +20,7 @@ async function main()
   const view = (state, actions) =>
       html.div(
       {
+        className: 'app-container',
         oncreate: async _ => plugins = await getPlugins()
       },
       [

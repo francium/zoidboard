@@ -7,7 +7,7 @@ export function ChartComponent({id, label, data})
   return html.div(
     {
       id,
-      class: 'chart-container',
+      className: 'card chart-container',
       oncreate: el => create_chart(id, label, data)
     }
   )
@@ -29,6 +29,7 @@ function create_chart(id, title, data)
         type: 'datetime'
       },
       yAxis: {
+        title: null,
         min: 0,
         max: 1
       },
@@ -37,22 +38,11 @@ function create_chart(id, title, data)
       },
       plotOptions: {
         area: {
-          fillColor: {
-            linearGradient: {
-              x1: 5,
-              y1: 0,
-              x2: 0,
-              y2: 0
-            },
-            stops: [
-              [0, 'black'],
-              [1, 'white']
-            ]
-          },
+          fillColor: '#f5f5f5',
           marker: {
             radius: 2
           },
-          lineWidth: 1,
+          lineWidth: 2,
           states: {
             hover: {
               lineWidth: 1
@@ -65,7 +55,7 @@ function create_chart(id, title, data)
         type: 'area',
         name: title,
         data,
-        color: 'black'
+        color: '#4a4a4a'
       }]
     }
   )

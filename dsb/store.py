@@ -37,7 +37,7 @@ class RingerBuffer:
 
 
 class Store:
-    _PERSIST_INTERVAL = 60 * 0.5 # 5 minutes
+    _PERSIST_INTERVAL = 60 * 0.5 * 1000 # 5 minutes
 
     def __init__(self):
         self._data_last_persist: Dict[str, Union[Timestamp]] = {}
