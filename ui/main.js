@@ -54,41 +54,10 @@ function create_chart_element(plugin)
 {
   const MILLI_IN_SEC = 1000
 
-  const labels = []
-  const data = []
-
-  for (let i = 0; i < plugin.data.length; i++)
-  {
-    const timestamp = plugin.data[i][0]
-    const datum = plugin.data[i][1]
-
-    labels.push(new Date(timestamp * MILLI_IN_SEC).toLocaleTimeString())
-    data.push(datum)
-
-    // If gap in data
-    if (i + 1 >= plugin.data.length) { continue }
-
-    // Fill in missing data if any interval data is missing
-    const next_timestamp = plugin.data[i + 1][0]
-    if (next_timestamp > (timestamp + plugin.schema.update_period))
-    {
-      const [missing_labels, missing_data] =
-        generate_missing_labels_and_data(
-          timestamp, next_timestamp, plugin.update_interval)
-      labels.push(
-        ...missing_labels.map(missing_label =>
-          new Date(missing_label * MILLI_IN_SEC).toLocaleTimeString()))
-      data.push(...missing_data)
-    }
-  }
-
   return ChartComponent({
-    id: `chart-{plugin.label.toLowerCase().replace(' ', '-')}`,
+    id: `chart-${plugin.schema.label.toLowerCase().replace(' ', '-')}`,
     label: plugin.schema.label,
-    labels,
-    data,
-    min: 0,
-    max: 1
+    data: plugin.data
   })
 }
 

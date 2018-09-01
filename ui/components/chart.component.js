@@ -1,82 +1,74 @@
 import * as html from '@hyperapp/html'
-import { Chart } from 'chart.js'
-import * as chartjs from 'chart.js'
+import Highcharts from 'highcharts'
 
 
-chartjs.defaults.global.elements.point.radius = 0
-chartjs.defaults.global.elements.line.tension = 0.4
-chartjs.defaults.global.elements.line.tension = 0.4
-
-
-export function ChartComponent({id, label, labels, data, min, max})
+export function ChartComponent({id, label, data})
 {
   return html.div(
-  {
-    id,
-    className: 'chart-container'
-  },
-  [
-    ChartCanvasComponent({label, labels, data, min, max})
-  ])
-}
-
-
-function ChartCanvasComponent({label, labels, data, min, max})
-{
-  return html.canvas(
     {
-      oncreate: el => create_chart(el, label, labels, data, min, max)
+      id,
+      class: 'chart-container',
+      oncreate: el => create_chart(id, label, data)
     }
   )
 }
 
 
-function create_chart(host, label, labels, data, min = undefined, max = undefined)
+function create_chart(id, title, data)
 {
-  return new Chart(
-    host,
+  console.log([0, Highcharts.getOptions().colors[0]])
+  console.log([1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')])
+  return new Highcharts.chart(
+    id,
     {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            backgroundColor: 'black',
-            borderWidth: 1,
-            borderColor: 'black',
-            label,
-            data
-          }
-        ]
+      chart: {
+        zoomType: 'x'
       },
-      options: {
-        animation: { duration: 0 },
-        scales: {
-          yAxes: [{
-            gridLines: {
-              drawBorder: false
+      title: {
+        text: title
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: {
+        min: 0,
+        max: 1
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: {
+              x1: 5,
+              y1: 0,
+              x2: 0,
+              y2: 0
             },
-            ticks: {
-              fontSize: 9,
-              min,
-              max,
-              padding: 10
+            stops: [
+              [0, 'black'],
+              [1, 'white']
+            ]
+          },
+          marker: {
+            radius: 2
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1
             }
-          }],
-          xAxes: [{
-            gridLines: {
-              display: false
-            },
-            ticks: {
-              fontSize: 9,
-              minRotation: 0,
-              maxRotation: 0,
-              autoSkip: true,
-              maxTicksLimit: 6,
-            }
-          }]
+          },
+          threshold: null
         }
-      }
+      },
+      series: [{
+        type: 'area',
+        name: title,
+        data,
+        color: 'black'
+      }]
     }
   )
 }
