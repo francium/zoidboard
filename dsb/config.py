@@ -14,6 +14,7 @@ _DEFAULT_CONFIG = {
         'hostname',
         'ip',
         'uptime',
+	'load',
         'mem_usage',
         'swap_usage',
     ]
