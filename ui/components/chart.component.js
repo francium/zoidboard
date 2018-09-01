@@ -16,8 +16,6 @@ export function ChartComponent({id, label, data})
 
 function create_chart(id, title, data)
 {
-  console.log([0, Highcharts.getOptions().colors[0]])
-  console.log([1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')])
   return new Highcharts.chart(
     id,
     {
