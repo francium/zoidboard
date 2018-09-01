@@ -20,4 +20,4 @@ def callback(result: str) -> Dict[str, int]:
     cached = data['Cached']
     used = total - free - buffers - cached
 
-    return '{:.2f}'.format(used / total)
+    return float('{:.2f}'.format(used / total))

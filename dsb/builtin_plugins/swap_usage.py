@@ -18,4 +18,4 @@ def callback(result: str) -> Dict[str, int]:
     free = data['SwapFree']
     used = total - free
 
-    return '{:2f}'.format(used / total)
+    return float('{:2f}'.format(used / total))
