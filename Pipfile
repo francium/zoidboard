@@ -13,7 +13,7 @@ flask-cors = "*"
 [dev-packages]
 pylint = "*"
 "autopep8" = "*"
-dsb = {editable = true, path = "."}
+"e1839a8" = {editable = true, path = "."}
 rope = "*"
 
 [requires]

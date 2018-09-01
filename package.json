@@ -1,6 +1,6 @@
 {
-  "name": "dsb",
-  "version": "1.0.0",
+  "name": "zoidboard",
+  "version": "0.1.0",
   "description": "",
   "main": "ui/main.js",
   "directories": {},
@@ -11,11 +11,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "watch": "parcel watch -d dsb/static/ -o bundle.js --public-url '/static' ui/main.js"
+    "watch": "parcel watch -d zoidboard/static/ -o bundle.js --public-url '/static' ui/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://gojira.local/francium/dsb.git"
+    "url": "https://gojira.local/francium/zoidboard.git"
   },
   "keywords": [],
   "author": "",

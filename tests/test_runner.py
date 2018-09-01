@@ -1,4 +1,4 @@
-# from dsb.runner import Plugin
+# from zoidboard.runner import Plugin
 
 
 # class TestRunner:

@@ -1,4 +1,4 @@
-from dsb.store import RingerBuffer, Store
+from zoidboard.store import RingerBuffer, Store
 
 
 class TestRingBuffer:

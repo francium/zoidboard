@@ -104,7 +104,7 @@ class Store:
 
 
 class StorePersistance:
-    STORE_LOCATION = os.path.expanduser('~/.local/share/dsb/')
+    STORE_LOCATION = os.path.expanduser('~/.local/share/zoidboard/')
 
     def __init__(self):
         # Init store location

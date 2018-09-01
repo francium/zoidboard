@@ -1,4 +1,4 @@
-from dsb import plugins
+from zoidboard import plugins
 
 class TestPlugins:
     def test_import_builtin_plugin(self):

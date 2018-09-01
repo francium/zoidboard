@@ -8,7 +8,7 @@ import sys
 from typing import Dict, Callable, Union
 
 
-CUSTOM_PLUGIN_LOCATION = os.path.expanduser('~/.config/dsb/plugins/')
+CUSTOM_PLUGIN_LOCATION = os.path.expanduser('~/.config/zoidboard/plugins/')
 
 
 logger = logging.getLogger()
@@ -31,7 +31,7 @@ def _try_import(name: str, custom_location: Union[str] = None):
 
 
 def _load_builtin_plugin(plugin_name: str):
-    with _try_import('dsb.builtin_plugins.' + plugin_name) as plugin:
+    with _try_import('zoidboard.builtin_plugins.' + plugin_name) as plugin:
         if plugin:
             logger.debug(f'Loaded builtin plugin "{ plugin_name }"')
         else:

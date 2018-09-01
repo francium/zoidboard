@@ -1,6 +1,6 @@
 from typing import List
 
-from dsb.scheduler import ScheduleItem, Scheduler
+from zoidboard.scheduler import ScheduleItem, Scheduler
 
 
 class TestScheduler:

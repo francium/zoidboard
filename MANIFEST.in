@@ -1,5 +1,5 @@
-recursive-include dsb/builtin_plugins *
-recursive-include dsb/templates *
-recursive-include dsb/static *
+recursive-include zoidboard/builtin_plugins *
+recursive-include zoidboard/templates *
+recursive-include zoidboard/static *
 include Pipfile
 include Pipfile.lock
