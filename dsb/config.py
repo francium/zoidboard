@@ -1,5 +1,6 @@
 import logging
 from os import environ
+from os.path import expanduser
 
 import yaml
 
@@ -18,7 +19,7 @@ _DEFAULT_CONFIG = {
     ]
 }
 
-_DEFAULT_CONFIG_LOCATION = 'dsb.yml'
+_DEFAULT_CONFIG_LOCATION = expanduser('~/.config/dsb/dsb.yml')
 _CONFIG_LOCATION = environ.get('DSB_CONFIG', _DEFAULT_CONFIG_LOCATION)
 
 config = _DEFAULT_CONFIG
