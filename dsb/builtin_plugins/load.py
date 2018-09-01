@@ -5,7 +5,7 @@ typeof = 'scalar', 'string'
 cmd = 'cat', '/proc/loadavg'
 def callback(result: str) -> str:
     labels = '1 min', '5 mins', '10 mins', 'processes'
-    col_width = max([len(label) for label in labels])j
+    col_width = max([len(label) for label in labels])
     # Don't care about last process id used (col 5)
     values = result.split(' ')[:-1]
 
