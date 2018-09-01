@@ -19,7 +19,7 @@ _DEFAULT_CONFIG = {
     ]
 }
 
-_DEFAULT_CONFIG_LOCATION = expanduser('~/.config/zoidboard/zoidboard.yml')
+_DEFAULT_CONFIG_LOCATION = expanduser('~/.config/zoidboard/config.yml')
 _CONFIG_LOCATION = environ.get('ZOIDBOARD_CONFIG', _DEFAULT_CONFIG_LOCATION)
 
 config = _DEFAULT_CONFIG
