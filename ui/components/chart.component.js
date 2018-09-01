@@ -16,9 +16,15 @@ export function ChartComponent({id, label, data})
 
 function create_chart(id, title, data)
 {
+  // Highcharts uses milliseconds since epoch, backend provides time in secs
+  data = data.map(d => [d[0] * 1000, d[1]])
+
   return new Highcharts.chart(
     id,
     {
+      time: {
+        timezoneOffset: new Date().getTimezoneOffset()
+      },
       chart: {
         zoomType: 'x'
       },
