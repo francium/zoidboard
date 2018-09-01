@@ -11,10 +11,9 @@ logger = logging.getLogger(__name__)
 _DEFAULT_CONFIG = {
     'hostname': None,
     'plugins': [
-        'hostname',
         'ip',
         'uptime',
-	'load',
+        'load',
         'mem_usage',
         'swap_usage',
     ]

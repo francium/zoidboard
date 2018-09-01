@@ -2,8 +2,9 @@ import { app } from 'hyperapp'
 import * as html from '@hyperapp/html'
 
 import * as models from './models.js';
-import { ChartComponent } from './components/chart.component.js'
-import { ScalarComponent } from './components/scalar.component.js'
+import ChartComponent from './components/chart.component.js'
+import ScalarComponent from './components/scalar.component.js'
+import HeaderComponent from './components/header.component.js'
 
 
 main()
@@ -11,7 +12,8 @@ main()
 
 async function main()
 {
-  let plugins = await getPlugins()
+  let plugins = await get_plugins()
+  let config = await get_config()
 
   const state = {plugins}
 
@@ -19,14 +21,23 @@ async function main()
 
   const view = (state, actions) =>
       html.div(
-      {
-        className: 'app-container',
-        oncreate: async _ => plugins = await getPlugins()
-      },
-      [
-        ...Object.keys(plugins).map(key =>
-          create_plugin_element(plugins[key]))
-      ])
+        {
+          className: 'app',
+        },
+        [
+          HeaderComponent(config.hostname),
+          html.div(
+            {
+              className: 'main-content',
+              oncreate: async _ => plugins = await get_plugins()
+            },
+            [
+              ...Object.keys(plugins).map(key =>
+                create_plugin_element(plugins[key]))
+            ]
+          )
+        ]
+      )
 
   app(state, actions, view, document.querySelector('#root'))
 }
@@ -63,6 +74,12 @@ function create_chart_element(plugin)
 }
 
 
+async function get_config()
+{
+  return await (await fetch('/api/config')).json()
+}
+
+
 async function get_schemas()
 {
   const schemas = await (await fetch('/api/plugin/schemas')).json()
@@ -85,7 +102,7 @@ async function get_stats()
 }
 
 
-async function getPlugins()
+async function get_plugins()
 {
   let stats
   let schemas

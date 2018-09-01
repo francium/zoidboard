@@ -1,16 +1,23 @@
 @import url('https://unpkg.com/picnic');
 
 #root {
+  font-size: 1em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+  color: #383838;
 }
 
-.app-container {
+.app {
+  width: 100%;
+}
+
+.main-content {
   width: 100%;
   max-width: 67%;
+  margin: 0 auto;
 }
 
 .chart-container {
@@ -27,6 +34,35 @@
   margin: 1em;
 }
 
+.header {
+  position: relative;
+  display: flex;
+  padding: 0.5em;
+  align-items: center;
+  background: linear-gradient(165deg, rgba(249,249,249,1) 0%,rgb(255, 241, 241) 100%);
+}
+
+.header-logo {
+  height: 100%;
+  margin-right: 0.67em;
+}
+.header-logo > img {
+  height: 100%;
+}
+
+.header-hostname {
+  color: #a4a4a4;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.header-datetime {
+  position: absolute;
+  right: 0.5em;
+  color: #595959;
+  font-size: 80%;
+}
+
 .scalar-value {
   font-family: monospace;
 }
@@ -37,7 +73,7 @@ pre {
 }
 
 @media (max-width: 1024px) {
-  .app-container {
+  .main-content {
     max-width: 786px;
   }
 }

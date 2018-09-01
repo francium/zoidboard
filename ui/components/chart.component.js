@@ -2,7 +2,7 @@ import * as html from '@hyperapp/html'
 import Highcharts from 'highcharts'
 
 
-export function ChartComponent({id, label, data})
+export default function ChartComponent({id, label, data})
 {
   return html.div(
     {

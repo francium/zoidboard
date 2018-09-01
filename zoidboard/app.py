@@ -19,7 +19,11 @@ def create_app(plugins):
 
     @app.route('/')
     def route_index():
-        return render_template('index.html')
+        return render_template('index.html', hostname=config['hostname'])
+
+    @app.route('/api/config')
+    def route_api_config():
+        return json.dumps(config)
 
     @app.route('/api/plugin/registered')
     def rotue_api_registered_plugins():
