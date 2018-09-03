@@ -3,17 +3,19 @@
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+      "eslint:recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
         "accessor-pairs": "error",
-        "array-bracket-newline": "error",
+        "array-bracket-newline": ["error", "consistent"],
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
-        "array-element-newline": "error",
+        "array-element-newline": ["error", "consistent"],
         "arrow-body-style": "error",
         "arrow-parens": [
             "error",
@@ -36,7 +38,7 @@
         "camelcase": "off",
         "capitalized-comments": "error",
         "class-methods-use-this": "error",
-        "comma-dangle": "true",
+        "comma-dangle": ["error", "always-multiline"],
         "comma-spacing": [
             "error",
             {
@@ -64,17 +66,14 @@
         "func-call-spacing": "off",
         "func-name-matching": "error",
         "func-names": "error",
-        "func-style": [
-            "error",
-            "declaration"
-        ],
-        "function-paren-newline": "off",
+        "func-style": "off",
+        "function-paren-newline": ["error", "consistent"],
         "generator-star-spacing": "error",
         "global-require": "error",
         "guard-for-in": "error",
         "handle-callback-err": "error",
         "id-blacklist": "error",
-        "id-length": "error",
+        "id-length": "off",
         "id-match": "error",
         "implicit-arrow-linebreak": "off",
         "indent": "off",
@@ -99,9 +98,9 @@
         "lines-between-class-members": "error",
         "max-classes-per-file": "off",
         "max-depth": "error",
-        "max-len": "error",
+        "max-len": ["error", 90],
         "max-lines": "error",
-        "max-lines-per-function": "error",
+        "max-lines-per-function": ["error", 100],
         "max-nested-callbacks": "error",
         "max-params": "error",
         "max-statements": "error",
@@ -194,6 +193,7 @@
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
         "no-unused-expressions": "error",
+        "no-unused-vars": "warn",
         "no-use-before-define": "off",
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
@@ -244,7 +244,7 @@
             "error",
             "last"
         ],
-        "sort-imports": "error",
+        "sort-imports": "off",
         "sort-keys": "off",
         "sort-vars": "error",
         "space-before-blocks": "error",

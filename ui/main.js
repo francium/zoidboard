@@ -1,10 +1,10 @@
-import { app } from 'hyperapp'
 import * as html from '@hyperapp/html'
+import {app} from 'hyperapp'
 
 import * as models from './models.js';
 import ChartComponent from './components/chart.component.js'
-import ScalarComponent from './components/scalar.component.js'
 import HeaderComponent from './components/header.component.js'
+import ScalarComponent from './components/scalar.component.js'
 
 
 main()
@@ -13,36 +13,39 @@ main()
 async function main()
 {
   let plugins = await get_plugins()
-  let config = await get_config()
+  const config = await get_config()
 
   const state = {plugins}
 
   const actions = {}
 
-  const view = (state, actions) =>
-      html.div(
-        {
-          className: 'app',
-        },
-        [
-          HeaderComponent(config.hostname),
-          html.div(
-            {
-              className: 'main-content',
-              oncreate: async _ => plugins = await get_plugins()
-            },
-            [
-              ...Object.keys(plugins).map(key =>
-                create_plugin_element(plugins[key]))
-            ]
-          )
-        ]
-      )
+  function view()
+  {
+    return html.div(
+      {
+        className: 'app',
+      },
+      [
+        HeaderComponent(config.hostname),
+        html.div(
+          {
+            className: 'main-content',
+            oncreate: async () => plugins = await get_plugins(),
+          },
+          [
+            ...Object.keys(plugins).map(key =>
+              create_plugin_element(plugins[key])),
+          ]
+        ),
+      ]
+    )
+  }
 
   app(state, actions, view, document.querySelector('#root'))
 }
 
 
+// eslint-disable-next-line consistent-return
 function create_plugin_element(plugin)
 {
   if (plugin.schema.typeof[0] === 'vector')
@@ -64,19 +67,17 @@ function create_scalar_element(plugin)
 
 function create_chart_element(plugin)
 {
-  const MILLI_IN_SEC = 1000
-
   return ChartComponent({
     id: `chart-${plugin.schema.label.toLowerCase().replace(' ', '-')}`,
     label: plugin.schema.label,
-    data: plugin.data
+    data: plugin.data,
   })
 }
 
 
 async function get_config()
 {
-  return await (await fetch('/api/config')).json()
+  return (await fetch('/api/config')).json()
 }
 
 
@@ -84,10 +85,10 @@ async function get_schemas()
 {
   const schemas = await (await fetch('/api/plugin/schemas')).json()
   return schemas.reduce((acc, schema) =>
-  {
-    acc[schema.name] = schema.plugin
-    return acc
-  }, {})
+    {
+      acc[schema.name] = schema.plugin
+      return acc
+    }, {})
 }
 
 
@@ -95,10 +96,10 @@ async function get_stats()
 {
   const stats = await (await fetch('/api/plugin/stats')).json()
   return stats.reduce((acc, stat) =>
-  {
-    acc[stat.name] = stat.data
-    return acc
-  }, {})
+    {
+      acc[stat.name] = stat.data
+      return acc
+    }, {})
 }
 
 
@@ -108,10 +109,11 @@ async function get_plugins()
   let schemas
 
   await Promise.all(
-  [
-    get_schemas().then(data => schemas = data),
-    get_stats().then(data => stats = data)
-  ])
+    [
+      get_schemas().then(data => schemas = data),
+      get_stats().then(data => stats = data),
+    ]
+  )
 
   const plugins = {}
   Object.keys(stats).forEach(key =>
@@ -122,13 +124,4 @@ async function get_plugins()
   })
 
   return plugins
-}
-
-
-function generate_missing_labels_and_data(start, end, interval)
-{
-  const labels = []
-  for (let i = start; i < end; i++)
-    labels.push(i)
-  return [labels, labels.map(_ => null)]
 }

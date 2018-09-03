@@ -5,22 +5,24 @@ export default function view(hostname)
 {
   return html.nav(
     {
-      className: 'header'
+      className: 'header',
     },
     [
-      html.div({className: 'header-logo'},
+      html.div(
+        {className: 'header-logo'},
         [
-        html.img({src: '/static/assets/logo.png'})
+          html.img({src: '/static/assets/logo.png'}),
         ]
       ),
       html.div({className: 'header-hostname'}, [hostname]),
-      html.div({className: 'header-datetime'},
+      html.div(
+        {className: 'header-datetime'},
         [
           html.div({style: {textAlign: 'end'}}, [new Date().toLocaleTimeString()]),
-          html.div({style: {textAlign: 'end'}}, [new Date().toLocaleDateString()])
+          html.div({style: {textAlign: 'end'}}, [new Date().toLocaleDateString()]),
         ]
       ),
-      html.div({className: 'header-datetime'}, [])
+      html.div({className: 'header-datetime'}, []),
     ]
   )
 }

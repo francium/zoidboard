@@ -9,9 +9,12 @@
     "highcharts": "^6.1.1",
     "hyperapp": "^1.2.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.5.0"
+  },
   "scripts": {
-    "watch": "parcel watch -d zoidboard/static/ -o bundle.js --public-url '/static' ui/main.js"
+    "watch": "parcel watch -d zoidboard/static/ -o bundle.js --public-url '/static' ui/main.js",
+    "lint": "eslint ui"
   },
   "repository": {
     "type": "git",
