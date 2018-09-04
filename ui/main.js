@@ -1,7 +1,7 @@
 import * as html from '@hyperapp/html'
-import {app} from 'hyperapp'
+import {app as hyperapp} from 'hyperapp'
 
-import * as models from './models.js';
+import * as models from './models.js'
 import ChartComponent from './components/chart.component.js'
 import HeaderComponent from './components/header.component.js'
 import ScalarComponent from './components/scalar.component.js'
@@ -12,36 +12,65 @@ main()
 
 async function main()
 {
-  let plugins = await get_plugins()
-  const config = await get_config()
+  const {config, plugins} = await get_init_data()
 
-  const state = {plugins}
+  const state =
+    {
+      hostname: config.hostname,
+      plugins,
+      last_update: new Date(),
+    }
 
-  const actions = {}
+  const actions =
+    {
+      update_plugin_data: () => async (state, actions) =>
+        {
+          const plugins = await get_plugins()
+          actions.plugin_data_updated({plugins: plugins, last_update: new Date()})
+        },
 
-  function view()
+      plugin_data_updated: ({plugins, last_update}) => () => ({plugins, last_update}),
+    }
+
+  function view(state, actions)
   {
     return html.div(
       {
         className: 'app',
       },
       [
-        HeaderComponent(config.hostname),
+        HeaderComponent(state, actions),
         html.div(
           {
             className: 'main-content',
-            oncreate: async () => plugins = await get_plugins(),
           },
           [
             ...Object.keys(plugins).map(key =>
-              create_plugin_element(plugins[key])),
+              create_plugin_element(state.plugins[key])),
           ]
         ),
       ]
     )
   }
 
-  app(state, actions, view, document.querySelector('#root'))
+  const app = hyperapp(state, actions, view, document.querySelector('#root'))
+  setInterval(app.update_plugin_data, 5000)
+}
+
+
+async function get_init_data()
+{
+  let config,
+      plugins
+
+  await Promise.all(
+    [
+      get_plugins().then(data => plugins = data),
+      get_config().then(data => config = data),
+    ],
+  )
+
+  return {config, plugins}
 }
 
 

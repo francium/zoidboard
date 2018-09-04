@@ -9,6 +9,7 @@ export default function ChartComponent({id, label, data})
       id,
       className: 'card chart-container',
       oncreate: () => create_chart(id, label, data),
+      onupdate: () => create_chart(id, label, data),
     }
   )
 }
@@ -61,6 +62,9 @@ function chart_config(title, data)
             },
           },
           threshold: null,
+        },
+        series: {
+          animation: false,
         },
       },
       series: [
